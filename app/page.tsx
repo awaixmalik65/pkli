@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen pt-[116px]">
+    <main className="min-h-screen pt-[60px] md:pt-[116px]">
       <Navbar />
       <HeroSlider />
       <ActionCards />

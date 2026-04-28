@@ -7,74 +7,11 @@ export default function AppDonate() {
   return (
     <section className="py-10 bg-[#F7F9FC]">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-6">
 
-          {/* Donate card — left (narrower) */}
+          {/* App Download card — left (wider) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="group relative overflow-hidden rounded-3xl bg-pkli-red min-h-[240px] flex flex-col justify-between p-6 lg:p-8 shadow-card"
-          >
-            {/* Background image */}
-            <div className="absolute inset-0">
-              <Image
-                src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&q=80&auto=format&fit=crop"
-                alt="Support our mission"
-                fill
-                className="object-cover opacity-15 group-hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 1024px) 100vw, 40vw"
-              />
-            </div>
-            <div className="absolute inset-0 bg-gradient-to-br from-pkli-red/90 to-pkli-red-dark" />
-            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
-
-            <div className="relative z-10 flex flex-col h-full">
-              <div>
-                <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center mb-4">
-                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                  </svg>
-                </div>
-
-                <h3 className="font-heading text-3xl lg:text-4xl text-white tracking-wide leading-tight mb-2">
-                  Support Our<br />Mission
-                </h3>
-                <p className="text-white/75 text-xs font-body leading-relaxed mb-5">
-                  Your generosity funds free treatments for deserving patients who cannot afford life-saving care.
-                </p>
-
-                {/* Impact stats */}
-                <div className="grid grid-cols-3 gap-2 mb-5">
-                  {[
-                    { value: "12K+", label: "Helped" },
-                    { value: "Free", label: "Treatments" },
-                    { value: "24/7", label: "Care" },
-                  ].map((stat) => (
-                    <div key={stat.label} className="text-center">
-                      <p className="text-white font-heading text-xl">{stat.value}</p>
-                      <p className="text-white/50 text-[9px] font-body uppercase tracking-wider mt-0.5">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <a
-                href="#donate"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-pkli-red font-bold text-sm tracking-wider font-body rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5 self-start"
-              >
-                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                </svg>
-                Donate Now
-              </a>
-            </div>
-          </motion.div>
-
-          {/* App Download card — right (wider) */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
@@ -99,8 +36,8 @@ export default function AppDonate() {
                 </div>
 
                 <h3 className="font-heading text-3xl lg:text-4xl text-white tracking-wide leading-tight mb-2">
-                  Healthcare<br />
-                  <span className="text-pkli-red">On the Go</span>
+                  Healthcare on the Go<br />
+                  <span className="text-pkli-red">with PKLI App</span>
                 </h3>
                 <p className="text-white/60 text-xs font-body leading-relaxed max-w-xs mb-5">
                   Book appointments, view lab reports, connect with your care team, and access health records — from your smartphone.
@@ -147,6 +84,59 @@ export default function AppDonate() {
                   />
                 </div>
               </div>
+            </div>
+          </motion.div>
+
+          {/* Donate card — right (narrower) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="group relative overflow-hidden rounded-3xl bg-pkli-red min-h-[240px] flex flex-col justify-between p-6 lg:p-8 shadow-card"
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-pkli-red/90 to-pkli-red-dark" />
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/5 -translate-y-1/2 translate-x-1/2" />
+
+            <div className="relative z-10 flex flex-col h-full">
+              <div>
+                <div className="w-10 h-10 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center mb-4">
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
+                </div>
+
+                <h3 className="font-heading text-3xl lg:text-4xl text-white tracking-wide leading-tight mb-2">
+                  Support Our<br />Mission
+                </h3>
+                <p className="text-white/75 text-xs font-body leading-relaxed mb-5">
+                  Your generosity funds free treatments for deserving patients who cannot afford life-saving care.
+                </p>
+
+                {/* Impact stats */}
+                <div className="grid grid-cols-3 gap-2 mb-5">
+                  {[
+                    { value: "12K+", label: "Helped" },
+                    { value: "Free", label: "Treatments" },
+                    { value: "24/7", label: "Care" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="text-center">
+                      <p className="text-white font-heading text-xl">{stat.value}</p>
+                      <p className="text-white/50 text-[9px] font-body uppercase tracking-wider mt-0.5">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <a
+                href="#donate"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-pkli-red font-bold text-sm tracking-wider font-body rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5 self-start"
+              >
+                <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                </svg>
+                Donate Now
+              </a>
             </div>
           </motion.div>
 

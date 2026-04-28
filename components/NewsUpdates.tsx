@@ -9,7 +9,7 @@ const news = [
     category: "Achievement",
     title: "PKLI Successfully Performs 2,400th Kidney Transplant Milestone",
     date: "April 18, 2026",
-    image: "https://images.unsplash.com/photo-1504813184591-01572f98c85f?w=600&q=80&auto=format&fit=crop",
+    image: "/images/appointment.webp",
     featured: true,
   },
   {
@@ -17,7 +17,7 @@ const news = [
     category: "Research",
     title: "New Immunosuppression Protocol Reduces Rejection Rates by 32%",
     date: "April 10, 2026",
-    image: "https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&q=80&auto=format&fit=crop",
+    image: "/images/liver transplant.jpeg",
     featured: false,
   },
   {
@@ -25,7 +25,7 @@ const news = [
     category: "Community",
     title: "Free Kidney Screening Camp Reaches 5,000 Patients Across Punjab",
     date: "March 29, 2026",
-    image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=600&q=80&auto=format&fit=crop",
+    image: "/images/Doctors.webp",
     featured: false,
   },
   {
@@ -33,7 +33,7 @@ const news = [
     category: "Technology",
     title: "PKLI Launches AI-Powered Diagnostic Platform for Liver Disease",
     date: "March 15, 2026",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80&auto=format&fit=crop",
+    image: "/images/Endoscopy.jpg",
     featured: false,
   },
 ];
@@ -66,7 +66,7 @@ export default function NewsUpdates() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-heading text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide"
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide"
             >
               Latest From <span className="text-gradient-red">Our Institute</span>
             </motion.h2>

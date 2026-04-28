@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
@@ -10,56 +11,49 @@ const services = [
     title: "Liver Transplant",
     description: "Pakistan's most advanced liver transplant program with exceptional outcomes and expert surgical teams.",
     image: "/images/liver transplant.jpeg",
-    tag: "Transplantation",
-    color: "#BE0000",
+    href: "/clinical/liver-transplant",
   },
   {
     id: 2,
     title: "Kidney Transplant",
     description: "Pakistan's leading kidney transplant program with exceptional long-term patient outcomes.",
     image: "/images/kidney transpant.jpg",
-    tag: "Transplantation",
-    color: "#1E3A5F",
+    href: "#",
   },
   {
     id: 3,
     title: "Interventional Endoscopy",
     description: "State-of-the-art diagnostic and therapeutic endoscopic procedures for gastrointestinal conditions.",
     image: "/images/Endoscopy.jpg",
-    tag: "Gastroenterology",
-    color: "#0A1628",
+    href: "#",
   },
   {
     id: 4,
     title: "Dialysis Unit",
     description: "Round-the-clock hemodialysis and peritoneal dialysis with advanced monitoring systems.",
     image: "/images/Dialysis.jpg",
-    tag: "Nephrology",
-    color: "#BE0000",
+    href: "#",
   },
   {
     id: 5,
     title: "Radiology",
     description: "MRI, CT, PET scanning, and interventional radiology for precise diagnostics and treatment.",
     image: "/images/Interventional Radiology.jpg",
-    tag: "Radiology",
-    color: "#1B2B4B",
+    href: "#",
   },
   {
     id: 6,
     title: "Critical Care",
     description: "24/7 intensive care unit with expert intensivists and cutting-edge life-support technology.",
     image: "/images/Critical Care.jpg",
-    tag: "ICU / CCU",
-    color: "#0A1628",
+    href: "#",
   },
   {
     id: 7,
     title: "Pathology",
     description: "Comprehensive diagnostic pathology services with state-of-the-art laboratory analysis.",
     image: "/images/Pathology.jpg",
-    tag: "Diagnostics",
-    color: "#1E3A5F",
+    href: "#",
   },
 ];
 
@@ -68,7 +62,6 @@ const GAP = 20;
 const STEP = CARD_W + GAP;
 
 export default function ServicesSlider() {
-  const [active, setActive] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const isDragging = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,7 +87,7 @@ export default function ServicesSlider() {
     <section id="services" className="section-pad bg-[#F7F9FC] overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16">
         {/* Header */}
-        <div className="flex items-end justify-between mb-12">
+        <div className="flex items-end justify-between mb-6 lg:mb-12">
           <div>
             <motion.p
               initial={{ opacity: 0, x: -20 }}
@@ -110,7 +103,7 @@ export default function ServicesSlider() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="font-heading text-5xl lg:text-6xl text-pkli-navy leading-none tracking-wide"
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-pkli-navy leading-none tracking-wide"
             >
               World-Class<br />
               <span className="text-gradient-red">Clinical Services</span>
@@ -161,13 +154,16 @@ export default function ServicesSlider() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.07, duration: 0.5 }}
-                onHoverStart={() => !isDragging.current && setActive(svc.id)}
-                onHoverEnd={() => setActive(null)}
-                className="relative flex-shrink-0 rounded-2xl overflow-hidden bg-white shadow-card group"
+                className="relative flex-shrink-0 rounded overflow-hidden bg-white shadow-card group cursor-pointer"
                 style={{ width: CARD_W, height: 380 }}
+                onClick={() => {
+                  if (!isDragging.current && svc.href !== "#") {
+                    window.location.href = svc.href;
+                  }
+                }}
               >
                 {/* Image */}
-                <div className="relative w-full h-52 overflow-hidden">
+                <div className="relative w-full h-64 overflow-hidden">
                   <Image
                     src={svc.image}
                     alt={svc.title}
@@ -176,37 +172,18 @@ export default function ServicesSlider() {
                     sizes="280px"
                     draggable={false}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                  <div className="absolute top-4 left-4">
-                    <span
-                      className="px-3 py-1 rounded-full text-white text-[10px] font-bold tracking-widest uppercase font-body"
-                      style={{ backgroundColor: svc.color }}
-                    >
-                      {svc.tag}
-                    </span>
-                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                 </div>
 
                 {/* Card body */}
-                <div className="p-5 flex flex-col flex-1">
-                  <h3 className="font-heading text-2xl text-pkli-navy tracking-wide leading-tight mb-2">
+                <div className="p-4 flex flex-col gap-1.5">
+                  <h3 className="font-heading text-2xl text-pkli-navy tracking-wide leading-tight group-hover:text-pkli-red transition-colors duration-200">
                     {svc.title}
                   </h3>
-                  <p className="text-gray-500 text-xs font-body leading-relaxed flex-1">{svc.description}</p>
-
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: active === svc.id ? 1 : 0 }}
-                    className="mt-4 flex items-center gap-1.5 text-pkli-red text-xs font-bold tracking-wider font-body"
-                  >
-                    Learn more
-                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </motion.div>
+                  <p className="text-gray-500 text-xs font-body leading-relaxed line-clamp-2">{svc.description}</p>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-400 origin-left bg-pkli-red" />
+                <div className="absolute bottom-0 left-0 right-0 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left bg-pkli-red" />
               </motion.div>
             ))}
           </motion.div>

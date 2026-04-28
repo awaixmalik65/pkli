@@ -158,7 +158,7 @@ export default function LiverTransplantPage() {
   const [activeDoctor, setActiveDoctor] = useState(0);
 
   return (
-    <main className="min-h-screen pt-[116px]">
+    <main className="min-h-screen pt-[60px] md:pt-[116px]">
       <Navbar />
 
       {/* ── Compact header ── */}
@@ -191,7 +191,7 @@ export default function LiverTransplantPage() {
                 <span className="w-5 h-0.5 bg-pkli-red rounded-full" />
                 Department Overview
               </p>
-              <h2 className="font-heading text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide mb-6">
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide mb-6">
                 Liver Transplant<br />
                 <span className="text-gradient-red">Program</span>
               </h2>
@@ -255,7 +255,7 @@ export default function LiverTransplantPage() {
               <span className="w-5 h-0.5 bg-pkli-red rounded-full" />
               Procedures & Surgeries
             </p>
-            <h2 className="font-heading text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
               Our Surgical <span className="text-gradient-red">Expertise</span>
             </h2>
           </div>
@@ -293,7 +293,7 @@ export default function LiverTransplantPage() {
                 </div>
 
                 {/* Content side */}
-                <div className={`bg-white px-8 py-9 lg:px-10 flex flex-col justify-center ${i % 2 === 1 ? "lg:order-first" : ""}`}>
+                <div className={`bg-white px-5 py-6 md:px-8 md:py-9 lg:px-10 flex flex-col justify-center ${i % 2 === 1 ? "lg:order-first" : ""}`}>
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-10 h-10 rounded-xl bg-pkli-red/10 flex items-center justify-center text-pkli-red flex-shrink-0 group-hover:bg-pkli-red group-hover:text-white transition-all duration-300">
                       {prog.icon}
@@ -335,7 +335,7 @@ export default function LiverTransplantPage() {
               <span className="w-5 h-0.5 bg-pkli-red rounded-full" />
               Who We Treat
             </p>
-            <h2 className="font-heading text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
               Liver Transplant <span className="text-gradient-red">Services</span>
             </h2>
           </div>

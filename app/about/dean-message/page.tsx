@@ -28,7 +28,7 @@ const fadeUp = {
 
 export default function DeanMessagePage() {
   return (
-    <main className="min-h-screen pt-[116px]">
+    <main className="min-h-screen pt-[60px] md:pt-[116px]">
       <Navbar />
 
       {/* ── Compact page header ── */}
@@ -126,7 +126,7 @@ export default function DeanMessagePage() {
                   <span className="w-5 h-0.5 bg-pkli-red rounded-full" />
                   Dean's Message
                 </p>
-                <h3 className="font-heading text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
+                <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
                   Committed to Quality,<br />
                   <span className="text-gradient-red">Integrity &amp; Excellence</span>
                 </h3>

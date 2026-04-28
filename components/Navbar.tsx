@@ -71,6 +71,7 @@ const navLinks: NavLink[] = [
     href: "#",
     children: [
       { label: "Book Appointment", href: "/patient/book-appointment" },
+      { label: "Patient Guide", href: "/patient/patient-guide" },
       { label: "Lab Reports", href: "#" },
       { label: "Patient Portal", href: "#" },
       { label: "Insurance", href: "#" },
@@ -106,10 +107,10 @@ export default function Navbar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 w-full">
         {/* Row 1: Logo + Contact */}
-        <div className={`bg-white border-b border-gray-200 shadow-sm overflow-hidden transition-all duration-300 ${scrolled ? "h-0 border-0" : "h-[72px]"}`}>
-          <div className="max-w-[1440px] mx-auto px-4 lg:px-8 flex items-center justify-between h-[72px]">
+        <div className={`bg-white shadow-sm overflow-hidden transition-all duration-300 border-b border-gray-200 ${scrolled ? "h-[60px] md:h-0 md:border-0" : "h-[60px] md:h-[72px]"}`}>
+          <div className="max-w-[1440px] mx-auto px-4 lg:px-8 flex items-center justify-between h-[60px] md:h-[72px]">
             <a href="/" className="flex-shrink-0">
-              <Image src="/images/pkli logo.png" alt="PKLI" width={340} height={52} priority className="h-[52px] w-auto object-contain" />
+              <Image src="/images/pkli logo.png" alt="PKLI" width={340} height={52} priority className="h-[36px] md:h-[52px] w-auto object-contain" />
             </a>
             <div className="hidden md:flex items-center gap-3">
               <a href="tel:+924211117554" className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-md text-gray-700 text-sm font-body font-medium hover:border-pkli-red hover:text-pkli-red transition-colors duration-200 whitespace-nowrap">
@@ -168,8 +169,8 @@ export default function Navbar() {
                         >
                           <div className="flex">
                             <div className="relative w-44 flex-shrink-0 min-h-full">
-                              <Image src="/images/slider-1.png" alt="PKLI Hospital" fill className="object-cover object-center" sizes="176px" />
-                              <div className="absolute inset-0 bg-pkli-navy/70" />
+                              <Image src="/images/BuildingPKLI.jpg" alt="PKLI Hospital Building" fill className="object-cover object-bottom" sizes="176px" />
+                              <div className="absolute inset-0 bg-gradient-to-b from-pkli-navy/30 via-pkli-navy/50 to-pkli-navy/90" />
                               <div className="absolute inset-0 flex flex-col justify-end p-5">
                                 <Image src="/images/pkli-logo.png" alt="PKLI" width={120} height={36} className="w-28 h-auto object-contain brightness-0 invert mb-3" />
                                 <p className="text-white/70 text-[10px] font-body leading-relaxed">JCI Accredited<br />Center of Excellence</p>

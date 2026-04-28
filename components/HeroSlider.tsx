@@ -40,7 +40,7 @@ export default function HeroSlider() {
   return (
     <div className="w-full max-w-[1440px] mx-auto px-0">
       <section
-        className="relative w-full h-[500px] overflow-hidden rounded-none"
+        className="relative w-full h-[260px] sm:h-[380px] lg:h-[500px] overflow-hidden rounded-none"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >

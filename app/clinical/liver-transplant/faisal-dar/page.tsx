@@ -147,7 +147,7 @@ const fadeUp = {
 
 export default function FaisalDarPage() {
   return (
-    <main className="min-h-screen pt-[116px]">
+    <main className="min-h-screen pt-[60px] md:pt-[116px]">
       <Navbar />
 
       {/* ── Compact header ── */}

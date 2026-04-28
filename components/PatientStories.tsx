@@ -86,38 +86,16 @@ export default function PatientStories() {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-10 items-stretch">
 
-          {/* Left — image (wider) */}
+          {/* Left — testimonials */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-2xl overflow-hidden min-h-[280px] lg:min-h-0 lg:col-span-3"
-          >
-            <Image
-              src="/images/patient-stories.webp"
-              alt="PKLI Patient Care"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 60vw"
-            />
-            {/* Overlay badge */}
-            <div className="absolute bottom-4 left-4 bg-pkli-navy/90 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-white/10">
-              <p className="text-white font-heading text-2xl leading-none">75%</p>
-              <p className="text-white/70 text-xs font-body mt-0.5">Patients receive free or<br />subsidised treatment</p>
-            </div>
-          </motion.div>
-
-          {/* Right — testimonials */}
-          <motion.div
-            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-between lg:col-span-2"
           >
             <div>
-              <h2 className="font-heading text-3xl lg:text-4xl text-pkli-navy leading-none tracking-wide mb-5">
+              <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl text-pkli-navy leading-none tracking-wide mb-5">
                 Lives We Have<br />
                 <span className="text-gradient-red">Transformed</span>
               </h2>
@@ -199,6 +177,29 @@ export default function PatientStories() {
               <span className="ml-auto text-gray-400 text-xs font-body">{current + 1} / {stories.length}</span>
             </div>
           </motion.div>
+
+          {/* Right — image */}
+          <motion.div
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="relative rounded-xl overflow-hidden min-h-[320px] lg:min-h-[420px] lg:col-span-3"
+          >
+            <Image
+              src="/images/patient-stories.webp"
+              alt="PKLI Patient Care"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 60vw"
+            />
+            {/* Overlay badge */}
+            <div className="absolute bottom-4 left-4 bg-pkli-navy/90 backdrop-blur-sm rounded-xl px-4 py-2.5 border border-white/10">
+              <p className="text-white font-heading text-2xl leading-none">75%</p>
+              <p className="text-white/70 text-xs font-body mt-0.5">Patients receive free or<br />subsidised treatment</p>
+            </div>
+          </motion.div>
+
         </div>
       </div>
     </section>

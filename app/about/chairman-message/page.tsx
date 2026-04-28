@@ -34,7 +34,7 @@ const fadeUp = {
 
 export default function ChairmanMessagePage() {
   return (
-    <main className="min-h-screen pt-[116px]">
+    <main className="min-h-screen pt-[60px] md:pt-[116px]">
       <Navbar />
 
       {/* ── Compact page header ── */}
@@ -130,7 +130,7 @@ export default function ChairmanMessagePage() {
                   <span className="w-5 h-0.5 bg-pkli-red rounded-full" />
                   Chairman's Message
                 </p>
-                <h3 className="font-heading text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
+                <h3 className="font-heading text-3xl sm:text-4xl lg:text-5xl text-pkli-navy leading-none tracking-wide">
                   A Message of Commitment<br />
                   <span className="text-gradient-red">&amp; Compassionate Care</span>
                 </h3>

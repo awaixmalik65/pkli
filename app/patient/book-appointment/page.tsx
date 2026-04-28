@@ -280,7 +280,7 @@ function BookingModal({
         className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col"
       >
         {/* Modal header */}
-        <div className="flex items-center gap-4 px-7 py-5 border-b border-gray-100">
+        <div className="flex items-center gap-4 px-4 md:px-7 py-4 md:py-5 border-b border-gray-100">
           <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-pkli-red/20">
             <DoctorAvatar src={doctor.image} initials={doctor.initials} />
           </div>
@@ -428,14 +428,14 @@ function BookingModal({
 
         {/* Modal footer */}
         {!confirmed && (
-          <div className="px-7 py-4 border-t border-gray-100 flex items-center justify-between gap-3 bg-[#FAFBFC]">
+          <div className="px-4 md:px-7 py-4 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-[#FAFBFC]">
             <div className="text-xs font-body text-gray-400">
               {selectedDate && selectedSlot
                 ? `📅 ${selectedDate.toLocaleDateString("en-PK", { month: "short", day: "numeric" })} · ${selectedSlot}`
                 : "Select date & time to confirm"}
             </div>
-            <div className="flex gap-2">
-              <button onClick={onClose} className="px-5 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-body font-semibold hover:border-gray-300 transition-colors">
+            <div className="flex gap-2 w-full sm:w-auto">
+              <button onClick={onClose} className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-body font-semibold hover:border-gray-300 transition-colors">
                 Cancel
               </button>
               <button
@@ -506,7 +506,7 @@ export default function BookAppointmentPage() {
   const isFiltered = locFilter !== "All Locations" || deptFilter !== "All Departments" || docFilter !== "All Doctors";
 
   return (
-    <main className="min-h-screen pt-[116px]">
+    <main className="min-h-screen pt-[60px] md:pt-[116px]">
       <Navbar />
 
       {/* ── Header ── */}
