@@ -1,131 +1,154 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const slides = [
-  { id: 1, image: "/images/slider 4.jpeg", alt: "PKLI Hospital" },
-  { id: 2, image: "/images/slider-1.png", alt: "PKLI Hospital" },
-  { id: 3, image: "/images/slider-2.png", alt: "PKLI Medical Care" },
+  { image: "/images/slider-1.png", alt: "PKLI Hospital" },
+  { image: "/images/slider-2.png", alt: "PKLI Medical Care" },
+  { image: "/images/slider 4.jpeg", alt: "PKLI Hospital" },
 ];
-
-const AUTOPLAY_INTERVAL = 5500;
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const [paused, setPaused] = useState(false);
 
-  const goTo = useCallback(
-    (index: number) => {
-      setDirection(index > current ? 1 : -1);
-      setCurrent(index);
-    },
-    [current]
-  );
+  useEffect(() => {
+    const measure = () => {
+      if (containerRef.current) setContainerWidth(containerRef.current.offsetWidth);
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (containerRef.current) ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
 
-  const next = useCallback(() => {
-    goTo((current + 1) % slides.length);
-  }, [current, goTo]);
+  const goTo = useCallback((idx: number) => {
+    setCurrent(((idx % slides.length) + slides.length) % slides.length);
+  }, []);
 
   useEffect(() => {
     if (paused) return;
-    const timer = setInterval(next, AUTOPLAY_INTERVAL);
-    return () => clearInterval(timer);
-  }, [next, paused]);
+    timerRef.current = setTimeout(() => goTo(current + 1), 5500);
+    return () => { if (timerRef.current) clearTimeout(timerRef.current); };
+  }, [current, paused, goTo]);
 
-  const slide = slides[current];
+  const PEEK = containerWidth * 0.05;
+  const GAP = 10;
+  const slideWidth = containerWidth > 0 ? containerWidth - PEEK * 2 - GAP : 0;
+  const trackOffset = containerWidth > 0 ? PEEK + GAP / 2 - current * (slideWidth + GAP) : 0;
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-0">
-      <section
-        className="relative w-full h-[260px] sm:h-[380px] lg:h-[500px] overflow-hidden rounded-none"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
-      >
-        {/* Background images */}
-        <AnimatePresence custom={direction} initial={false}>
+    // Pull back up over the main pt offset so this fills from below the navbar
+    <section
+      className="relative overflow-hidden bg-black -mt-[60px] md:-mt-[116px] pt-[60px] md:pt-[116px]"
+      style={{ height: "90svh" }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div ref={containerRef} className="absolute inset-0 top-[60px] md:top-[116px]">
+        {containerWidth > 0 && (
           <motion.div
-            key={slide.id}
-            custom={direction}
-            variants={{
-              enter: (dir: number) => ({ scale: 1.04, opacity: 0, x: dir * 40 }),
-              center: { scale: 1, opacity: 1, x: 0 },
-              exit: (dir: number) => ({ scale: 0.98, opacity: 0, x: -dir * 40 }),
-            }}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.85, ease: [0.32, 0.72, 0, 1] }}
-            className="absolute inset-0"
+            className="absolute top-0 left-0 h-full flex"
+            animate={{ x: trackOffset }}
+            transition={{ type: "spring", stiffness: 220, damping: 30, mass: 1 }}
           >
-            <Image
-              src={slide.image}
-              alt={slide.alt}
-              fill
-              priority={slide.id === 1}
-              className="object-cover object-center"
-              sizes="(max-width: 1440px) 100vw, 1440px"
-            />
+            {slides.map((slide, i) => {
+              const isActive = i === current;
+              return (
+                <div
+                  key={i}
+                  className="relative flex-shrink-0 h-full overflow-hidden"
+                  style={{
+                    width: slideWidth,
+                    marginRight: i < slides.length - 1 ? GAP : 0,
+                    borderRadius: 10,
+                  }}
+                >
+                  <Image
+                    src={slide.image}
+                    alt={slide.alt}
+                    fill
+                    className={`object-cover transition-all duration-700 ${
+                      isActive ? "brightness-90 scale-100" : "brightness-[0.18] scale-[1.04]"
+                    }`}
+                    sizes="95vw"
+                    priority={i === 0}
+                  />
+                </div>
+              );
+            })}
           </motion.div>
-        </AnimatePresence>
+        )}
 
-        {/* Subtle vignette overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 pointer-events-none" />
-
-        {/* Left accent line */}
-        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-pkli-red via-pkli-red/40 to-transparent z-10" />
-
-        {/* Slide dot rail — right side */}
-        <div className="absolute right-5 top-1/2 -translate-y-1/2 z-20 flex flex-col gap-2.5">
-          {slides.map((s, i) => (
-            <button
-              key={s.id}
-              onClick={() => goTo(i)}
-              className={`transition-all duration-300 rounded-full ${
-                i === current
-                  ? "w-1.5 h-8 bg-white"
-                  : "w-1.5 h-3 bg-white/40 hover:bg-white/70"
-              }`}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Prev / Next arrows — bottom right */}
-        <div className="absolute bottom-5 right-5 z-20 flex gap-2">
-          <button
-            onClick={() => goTo((current - 1 + slides.length) % slides.length)}
-            className="w-9 h-9 rounded-full border border-white/40 flex items-center justify-center text-white/80 hover:text-white hover:border-white/70 hover:bg-white/10 transition-all backdrop-blur-sm"
-            aria-label="Previous slide"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        {/* Left arrow */}
+        <button
+          onClick={() => goTo(current - 1)}
+          aria-label="Previous"
+          className="absolute left-0 top-0 bottom-0 z-20 flex items-center justify-center group"
+          style={{ width: Math.max(PEEK, 40) }}
+        >
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 group-hover:bg-white/25 border border-white/20 flex items-center justify-center backdrop-blur-sm transition-all duration-200">
+            <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
-          </button>
-          <button
-            onClick={next}
-            className="w-9 h-9 rounded-full bg-pkli-red flex items-center justify-center text-white hover:bg-pkli-red-dark transition-all shadow-lg"
-            aria-label="Next slide"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          </div>
+        </button>
+
+        {/* Right arrow */}
+        <button
+          onClick={() => goTo(current + 1)}
+          aria-label="Next"
+          className="absolute right-0 top-0 bottom-0 z-20 flex items-center justify-center group"
+          style={{ width: Math.max(PEEK, 40) }}
+        >
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/10 group-hover:bg-white/25 border border-white/20 flex items-center justify-center backdrop-blur-sm transition-all duration-200">
+            <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
-          </button>
+          </div>
+        </button>
+
+        {/* Counter + dots — bottom right */}
+        <div className="absolute bottom-5 right-8 sm:right-12 z-20 flex flex-col items-end gap-2.5">
+          <p className="text-white/40 text-[10px] font-body tracking-widest select-none">
+            <span className="text-white/80 font-bold text-sm font-heading">{String(current + 1).padStart(2, "0")}</span>
+            <span className="mx-1">/</span>
+            {String(slides.length).padStart(2, "0")}
+          </p>
+          <div className="flex items-center gap-1.5">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => goTo(i)}
+                aria-label={`Slide ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === current ? "w-7 h-[5px] bg-pkli-red" : "w-[5px] h-[5px] bg-white/30 hover:bg-white/60"
+                }`}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Progress bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/20 z-20">
+        {!paused && (
           <motion.div
             key={`progress-${current}`}
+            className="absolute bottom-0 z-20 h-[3px] bg-pkli-red origin-left"
+            style={{
+              left: `${(PEEK / containerWidth) * 100}%`,
+              width: `${(slideWidth / containerWidth) * 100}%`,
+            }}
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: AUTOPLAY_INTERVAL / 1000, ease: "linear" }}
-            className="h-full bg-pkli-red origin-left"
+            transition={{ duration: 5.5, ease: "linear" }}
           />
-        </div>
-      </section>
-    </div>
+        )}
+      </div>
+    </section>
   );
 }

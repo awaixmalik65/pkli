@@ -32,7 +32,7 @@ const cards = [
     title: "Donate Now",
     description: "Help us save lives — give what you can",
     image: "/images/donate.jpg",
-    href: "#donate",
+    href: "/donate",
     color: "from-pkli-red/80 to-rose-800/60",
     accent: "#BE0000",
   },

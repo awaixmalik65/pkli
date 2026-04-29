@@ -78,13 +78,13 @@ const navLinks: NavLink[] = [
     ],
   },
   { label: "Institute of Nursing & Allied Health Sciences", href: "#" },
-  { label: "PKLI Rawalpindi", href: "#" },
+  { label: "PKLI Rawalpindi", href: "/pkli-rawalpindi" },
   { label: "PKLI Filter Clinics", href: "#" },
   {
     label: "Get Involved",
     href: "#",
     children: [
-      { label: "Donate", href: "#" },
+      { label: "Donate", href: "/donate" },
       { label: "Volunteer", href: "#" },
       { label: "Research", href: "#" },
       { label: "Careers", href: "#" },
@@ -125,7 +125,7 @@ export default function Navbar() {
                 </svg>
                 info@pkli.org.pk
               </a>
-              <a href="#donate" className="px-5 py-2 bg-pkli-red hover:bg-pkli-red-dark text-white text-sm font-body font-semibold rounded-md transition-colors duration-200 whitespace-nowrap">
+              <a href="/donate" className="px-5 py-2 bg-pkli-red hover:bg-pkli-red-dark text-white text-sm font-body font-semibold rounded-md transition-colors duration-200 whitespace-nowrap">
                 Donate Now
               </a>
             </div>
@@ -276,7 +276,7 @@ export default function Navbar() {
                 <a href="tel:+924211117554" onClick={() => setMobileOpen(false)} className="block text-center py-3 border border-white/20 text-white/80 font-semibold text-sm rounded-md">
                   +92 42 111 117 554
                 </a>
-                <a href="#donate" onClick={() => setMobileOpen(false)} className="block text-center py-3 bg-pkli-red text-white font-bold text-sm rounded-md">
+                <a href="/donate" onClick={() => setMobileOpen(false)} className="block text-center py-3 bg-pkli-red text-white font-bold text-sm rounded-md">
                   Donate Now
                 </a>
               </div>

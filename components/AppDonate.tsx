@@ -129,7 +129,7 @@ export default function AppDonate() {
               </div>
 
               <a
-                href="#donate"
+                href="/donate"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-gray-50 text-pkli-red font-bold text-sm tracking-wider font-body rounded-full transition-all duration-200 shadow-lg hover:-translate-y-0.5 self-start"
               >
                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
